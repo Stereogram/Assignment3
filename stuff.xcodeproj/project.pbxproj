@@ -8,24 +8,47 @@
 
 /* Begin PBXBuildFile section */
 		3C01A23D200FDB3900BB0D7C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C01A23C200FDB3900BB0D7C /* AppDelegate.m */; };
-		3C01A240200FDB3900BB0D7C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C01A23F200FDB3900BB0D7C /* ViewController.m */; };
 		3C01A243200FDB3900BB0D7C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C01A241200FDB3900BB0D7C /* Main.storyboard */; };
 		3C01A245200FDB3900BB0D7C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C01A244200FDB3900BB0D7C /* Assets.xcassets */; };
 		3C01A248200FDB3900BB0D7C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C01A246200FDB3900BB0D7C /* LaunchScreen.storyboard */; };
 		3C01A24B200FDB3900BB0D7C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C01A24A200FDB3900BB0D7C /* main.m */; };
+		3C01A26C200FEC5800BB0D7C /* Renderer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3C01A266200FEC5800BB0D7C /* Renderer.mm */; };
+		3C01A26D200FEC5800BB0D7C /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3C01A268200FEC5800BB0D7C /* Shader.fsh */; };
+		3C01A26E200FEC5800BB0D7C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C01A269200FEC5800BB0D7C /* ViewController.m */; };
+		3C01A26F200FEC5800BB0D7C /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3C01A26A200FEC5800BB0D7C /* Shader.vsh */; };
+		3C01A270200FEC5800BB0D7C /* GLESRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C01A26B200FEC5800BB0D7C /* GLESRenderer.cpp */; };
+		3C9B7811205A1A7E0092FBF0 /* crate.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C9B7810205A1A7E0092FBF0 /* crate.jpg */; };
+		3C9B7817205A378B0092FBF0 /* front.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C9B7812205A378B0092FBF0 /* front.jpg */; };
+		3C9B7818205A378B0092FBF0 /* left.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C9B7813205A378B0092FBF0 /* left.jpg */; };
+		3C9B7819205A378B0092FBF0 /* back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C9B7814205A378B0092FBF0 /* back.jpg */; };
+		3C9B781A205A378B0092FBF0 /* floor.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C9B7815205A378B0092FBF0 /* floor.jpg */; };
+		3C9B781B205A378B0092FBF0 /* right.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C9B7816205A378B0092FBF0 /* right.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3C01A238200FDB3900BB0D7C /* stuff.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = stuff.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C01A23B200FDB3900BB0D7C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3C01A23C200FDB3900BB0D7C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3C01A23E200FDB3900BB0D7C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3C01A23F200FDB3900BB0D7C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		3C01A242200FDB3900BB0D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3C01A244200FDB3900BB0D7C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3C01A247200FDB3900BB0D7C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3C01A249200FDB3900BB0D7C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C01A24A200FDB3900BB0D7C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3C01A252200FEB0B00BB0D7C /* stuff.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = stuff.xcodeproj; sourceTree = SOURCE_ROOT; };
+		3C01A264200FEC5700BB0D7C /* GLESRenderer.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = GLESRenderer.hpp; sourceTree = "<group>"; };
+		3C01A265200FEC5700BB0D7C /* Renderer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Renderer.h; sourceTree = "<group>"; };
+		3C01A266200FEC5800BB0D7C /* Renderer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Renderer.mm; sourceTree = "<group>"; };
+		3C01A267200FEC5800BB0D7C /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		3C01A268200FEC5800BB0D7C /* Shader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.fsh; sourceTree = "<group>"; };
+		3C01A269200FEC5800BB0D7C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3C01A26A200FEC5800BB0D7C /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
+		3C01A26B200FEC5800BB0D7C /* GLESRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLESRenderer.cpp; sourceTree = "<group>"; };
+		3C9B7810205A1A7E0092FBF0 /* crate.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = crate.jpg; sourceTree = "<group>"; };
+		3C9B7812205A378B0092FBF0 /* front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = front.jpg; sourceTree = "<group>"; };
+		3C9B7813205A378B0092FBF0 /* left.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = left.jpg; sourceTree = "<group>"; };
+		3C9B7814205A378B0092FBF0 /* back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = back.jpg; sourceTree = "<group>"; };
+		3C9B7815205A378B0092FBF0 /* floor.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = floor.jpg; sourceTree = "<group>"; };
+		3C9B7816205A378B0092FBF0 /* right.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = right.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,10 +81,23 @@
 		3C01A23A200FDB3900BB0D7C /* stuff */ = {
 			isa = PBXGroup;
 			children = (
+				3C01A26B200FEC5800BB0D7C /* GLESRenderer.cpp */,
+				3C01A264200FEC5700BB0D7C /* GLESRenderer.hpp */,
+				3C01A265200FEC5700BB0D7C /* Renderer.h */,
+				3C01A266200FEC5800BB0D7C /* Renderer.mm */,
+				3C01A268200FEC5800BB0D7C /* Shader.fsh */,
+				3C01A26A200FEC5800BB0D7C /* Shader.vsh */,
+				3C9B7810205A1A7E0092FBF0 /* crate.jpg */,
+				3C9B7814205A378B0092FBF0 /* back.jpg */,
+				3C9B7815205A378B0092FBF0 /* floor.jpg */,
+				3C9B7812205A378B0092FBF0 /* front.jpg */,
+				3C9B7813205A378B0092FBF0 /* left.jpg */,
+				3C9B7816205A378B0092FBF0 /* right.jpg */,
+				3C01A267200FEC5800BB0D7C /* ViewController.h */,
+				3C01A269200FEC5800BB0D7C /* ViewController.m */,
+				3C01A252200FEB0B00BB0D7C /* stuff.xcodeproj */,
 				3C01A23B200FDB3900BB0D7C /* AppDelegate.h */,
 				3C01A23C200FDB3900BB0D7C /* AppDelegate.m */,
-				3C01A23E200FDB3900BB0D7C /* ViewController.h */,
-				3C01A23F200FDB3900BB0D7C /* ViewController.m */,
 				3C01A241200FDB3900BB0D7C /* Main.storyboard */,
 				3C01A244200FDB3900BB0D7C /* Assets.xcassets */,
 				3C01A246200FDB3900BB0D7C /* LaunchScreen.storyboard */,
@@ -69,6 +105,11 @@
 				3C01A24A200FDB3900BB0D7C /* main.m */,
 			);
 			path = stuff;
+			sourceTree = "<group>";
+		};
+		3C01A253200FEB0B00BB0D7C /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -117,6 +158,12 @@
 			mainGroup = 3C01A22F200FDB3900BB0D7C;
 			productRefGroup = 3C01A239200FDB3900BB0D7C /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3C01A253200FEB0B00BB0D7C /* Products */;
+					ProjectRef = 3C01A252200FEB0B00BB0D7C /* stuff.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3C01A237200FDB3900BB0D7C /* stuff */,
@@ -129,9 +176,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C01A26D200FEC5800BB0D7C /* Shader.fsh in Resources */,
 				3C01A248200FDB3900BB0D7C /* LaunchScreen.storyboard in Resources */,
+				3C9B781B205A378B0092FBF0 /* right.jpg in Resources */,
+				3C9B7818205A378B0092FBF0 /* left.jpg in Resources */,
+				3C9B7817205A378B0092FBF0 /* front.jpg in Resources */,
+				3C9B7819205A378B0092FBF0 /* back.jpg in Resources */,
 				3C01A245200FDB3900BB0D7C /* Assets.xcassets in Resources */,
+				3C9B7811205A1A7E0092FBF0 /* crate.jpg in Resources */,
 				3C01A243200FDB3900BB0D7C /* Main.storyboard in Resources */,
+				3C9B781A205A378B0092FBF0 /* floor.jpg in Resources */,
+				3C01A26F200FEC5800BB0D7C /* Shader.vsh in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,8 +197,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3C01A240200FDB3900BB0D7C /* ViewController.m in Sources */,
+				3C01A270200FEC5800BB0D7C /* GLESRenderer.cpp in Sources */,
 				3C01A24B200FDB3900BB0D7C /* main.m in Sources */,
+				3C01A26C200FEC5800BB0D7C /* Renderer.mm in Sources */,
+				3C01A26E200FEC5800BB0D7C /* ViewController.m in Sources */,
 				3C01A23D200FDB3900BB0D7C /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -281,6 +338,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YQQ637Y7RT;
 				INFOPLIST_FILE = stuff/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.stuff;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -295,6 +353,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YQQ637Y7RT;
 				INFOPLIST_FILE = stuff/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.test.stuff;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -1,15 +1,16 @@
 //
 //  ViewController.h
-//  stuff
+//  c8051intro3
 //
-//  Created by Rian Neufelt on 2018-01-17.
-//  Copyright © 2018 Rian Neufelt. All rights reserved.
+//  Created by Borna Noureddin on 2017-12-20.
+//  Copyright © 2017 Borna Noureddin. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
+#import "Renderer.h" // ###
 
-@interface ViewController : UIViewController
-
+//@interface ViewController : UIViewController
+@interface ViewController : GLKViewController // ###
 
 @end
 
