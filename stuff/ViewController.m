@@ -54,7 +54,8 @@
     [self.view addGestureRecognizer:pan];
     
      UITapGestureRecognizer *doubleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector (ThreeFingerTap:)];
-    tap.numberOfTapsRequired = 3;
+    doubleTapRecognizer.numberOfTapsRequired = 3;
+    doubleTapRecognizer.numberOfTouchesRequired =2;
     // ### >>>
 }
 - (IBAction)NeRotate:(id)sender {
@@ -62,7 +63,7 @@
     AngleX -= 25;
 }
 
--(void)ThreeFingerTap:(UITapGestureRecognizer*)sender {
+-(IBAction)ThreeFingerTap:(UITapGestureRecognizer*)sender {
     NSLog(@"testing if this double tap gesture is working");
     stationary = !stationary;
     
