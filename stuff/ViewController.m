@@ -13,6 +13,8 @@
     CGPoint start;
     float ScaleX, ScaleY;
     float AngleX;
+    
+    float Xpos, Ypos, Zpos;
     bool ToggleRotate;
     bool stationary;
     bool ToggleSize;
@@ -62,6 +64,7 @@
 - (IBAction)NeRotate:(id)sender {
     
     AngleX -= 25;
+    NSLog(@"%f", AngleX);
 }
 
 -(IBAction)ThreeFingerTap:(UITapGestureRecognizer*)doubleTapRecognizer {
@@ -73,6 +76,17 @@
         RotateNe.hidden = !RotateNe.hidden;
         Rotate.hidden = !Rotate.hidden;
         ToggleScale.hidden = !ToggleScale.hidden;
+        Xne.hidden = !Xne.hidden;
+        Xaxis.hidden = !Xaxis.hidden;
+        Xpo.hidden = !Xpo.hidden;
+        
+        Yne.hidden = !Yne.hidden;
+        Yaxis.hidden = !Yaxis.hidden;
+        Ypo.hidden = !Ypo.hidden;
+        
+        Zne.hidden = !Zne.hidden;
+        Zaxis.hidden = !Zaxis.hidden;
+        Zpo.hidden = !Zpo.hidden;
         }
     
     
@@ -83,20 +97,44 @@
     if (ToggleSize){
         ScaleX = 30;
         ScaleY = 30;
-        
+        NSLog(@"%f", ScaleX +  ScaleY);
     } else if (ToggleSize == false)
     {
         ScaleX = 10;
         ScaleY = 10;
-        
+        NSLog(@"%f", ScaleX +  ScaleY);
     }
     
     
 }
 - (IBAction)PoRotate:(id)sender {
 
-    AngleX += 25;
-    
+    AngleX += 5;
+    NSLog(@"%f",AngleX);
+}
+
+- (IBAction)NeXaxis:(id)sender {
+    Xpos -= 5;
+}
+
+- (IBAction)PoXaxis:(id)sender {
+    Xpos += 5;
+}
+
+- (IBAction)NeYaxis:(id)sender {
+    Ypos -= 5;
+}
+
+- (IBAction)PoYaxis:(id)sender {
+    Ypos += 5;
+}
+
+- (IBAction)NeZaxis:(id)sender {
+    Zpos -= 5;
+}
+
+- (IBAction)PoZaxis:(id)sender {
+    Zpos += 5;
 }
 
 
@@ -107,6 +145,7 @@
 
 - (void)update
 {
+    
     [glesRenderer setRotate:AngleX];
     [glesRenderer setScale:ScaleX ScaleY:ScaleY]; //passes SizeX and SizeY to renderer
     [glesRenderer update]; // ###

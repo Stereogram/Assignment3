@@ -58,6 +58,8 @@ static bool maze[5][5] = {
     float RX; //Rotation
     float camRot;
     float SizeX, SizeY;
+    float mXpos, mYpos, mZpos;
+    
     float *quadVertices, *quadTexCoords, *quadNormals;
     int *quadIndices, quadNumIndices;
     
@@ -159,6 +161,14 @@ static bool maze[5][5] = {
     
     SizeX = x;
     SizeY = y;
+    
+}
+
+-(void)setPosition:(float)xPo PositionY:(float)yPo PositionZ:(float)zPo{
+    
+    mXpos = xPo;
+    mYpos = yPo;
+    mZpos = zPo;
     
 }
 
