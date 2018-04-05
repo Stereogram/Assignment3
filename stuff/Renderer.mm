@@ -8,6 +8,7 @@
 #import <GLKit/GLKit.h>
 #include <chrono>
 #include "GLESRenderer.hpp"
+#include <vector>
 
 // Uniform index.
 enum
@@ -62,6 +63,10 @@ static bool maze[5][5] = {
     
     float *cubeVertices, *cubeTexCoords, *cubeNormals;
     int *cubeIndices, cubeNumIndices;
+    
+    std::vector<GLKVector3> vertices;
+    std::vector<GLKVector2> uvs;
+    std::vector<GLKVector3> normals;
     
 }
 

@@ -17,6 +17,7 @@
 		3C01A26E200FEC5800BB0D7C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C01A269200FEC5800BB0D7C /* ViewController.m */; };
 		3C01A26F200FEC5800BB0D7C /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3C01A26A200FEC5800BB0D7C /* Shader.vsh */; };
 		3C01A270200FEC5800BB0D7C /* GLESRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C01A26B200FEC5800BB0D7C /* GLESRenderer.cpp */; };
+		3C2CE7892074AEA5009307F2 /* rat.obj in Resources */ = {isa = PBXBuildFile; fileRef = 3C2CE7882074AEA5009307F2 /* rat.obj */; };
 		3C9B7811205A1A7E0092FBF0 /* crate.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C9B7810205A1A7E0092FBF0 /* crate.jpg */; };
 		3C9B7817205A378B0092FBF0 /* front.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C9B7812205A378B0092FBF0 /* front.jpg */; };
 		3C9B7818205A378B0092FBF0 /* left.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 3C9B7813205A378B0092FBF0 /* left.jpg */; };
@@ -43,6 +44,7 @@
 		3C01A269200FEC5800BB0D7C /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		3C01A26A200FEC5800BB0D7C /* Shader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = Shader.vsh; sourceTree = "<group>"; };
 		3C01A26B200FEC5800BB0D7C /* GLESRenderer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLESRenderer.cpp; sourceTree = "<group>"; };
+		3C2CE7882074AEA5009307F2 /* rat.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = rat.obj; sourceTree = "<group>"; };
 		3C9B7810205A1A7E0092FBF0 /* crate.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = crate.jpg; sourceTree = "<group>"; };
 		3C9B7812205A378B0092FBF0 /* front.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = front.jpg; sourceTree = "<group>"; };
 		3C9B7813205A378B0092FBF0 /* left.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = left.jpg; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				3C9B7810205A1A7E0092FBF0 /* crate.jpg */,
 				3C9B7814205A378B0092FBF0 /* back.jpg */,
 				3C9B7815205A378B0092FBF0 /* floor.jpg */,
+				3C2CE7882074AEA5009307F2 /* rat.obj */,
 				3C9B7812205A378B0092FBF0 /* front.jpg */,
 				3C9B7813205A378B0092FBF0 /* left.jpg */,
 				3C9B7816205A378B0092FBF0 /* right.jpg */,
@@ -179,6 +182,7 @@
 				3C01A26D200FEC5800BB0D7C /* Shader.fsh in Resources */,
 				3C01A248200FDB3900BB0D7C /* LaunchScreen.storyboard in Resources */,
 				3C9B781B205A378B0092FBF0 /* right.jpg in Resources */,
+				3C2CE7892074AEA5009307F2 /* rat.obj in Resources */,
 				3C9B7818205A378B0092FBF0 /* left.jpg in Resources */,
 				3C9B7817205A378B0092FBF0 /* front.jpg in Resources */,
 				3C9B7819205A378B0092FBF0 /* back.jpg in Resources */,
