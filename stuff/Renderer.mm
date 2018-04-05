@@ -67,6 +67,7 @@ static bool maze[5][5] = {
     std::vector<GLKVector3> vertices;
     std::vector<GLKVector2> uvs;
     std::vector<GLKVector3> normals;
+    std::vector<unsigned short> indices;
     
 }
 
