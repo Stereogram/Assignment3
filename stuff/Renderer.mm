@@ -59,6 +59,12 @@ static bool maze[5][5] = {
     float camRot;
     float SizeX, SizeY;
     float mXpos, mYpos, mZpos;
+    float forward,left;
+    float *quadVertices, *quadTexCoords, *quadNormals;
+    int *quadIndices, quadNumIndices;
+    
+    float *cubeVertices, *cubeTexCoords, *cubeNormals;
+    int *cubeIndices, cubeNumIndices;
     
     std::vector<GLKVector3> vertices;
     std::vector<GLKVector2> uvs;
@@ -212,6 +218,29 @@ static bool maze[5][5] = {
     p = GLKMatrix4MakePerspective(60.0f * M_PI / 180.0f, aspect, 1.0f, 20.0f);
 
 }
+
+-(void)walking{
+    int walk = arc4random() % 4;
+    
+    switch (walk)
+    {
+        case 0:
+            NSLog(@"0");
+            forward++;
+        case 1:
+            NSLog(@"1");
+            forward--;
+        case 2:
+            left++;
+            NSLog(@"2");
+        case 3:
+            left--;
+            NSLog(@"3");
+    }
+    
+    
+}
+
 -(void)setRotate:(float)xr{
     
     RX = xr;
