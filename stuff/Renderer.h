@@ -15,6 +15,8 @@
 - (void)reset;
 - (void)setScale:(float)x ScaleY:(float)y;
 - (void)setRotate:(float)xr;
+- (void)setPosition:(float)xPo PositionY:(float)yPo PositionZ:(float)zPo;
+- (void)station:(bool)st;
 @end
 
 #endif /* Renderer_h */
