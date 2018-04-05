@@ -60,21 +60,23 @@ static bool maze[5][5] = {
     float SizeX, SizeY;
     float mXpos, mYpos, mZpos;
     
-    float *quadVertices, *quadTexCoords, *quadNormals;
-    int *quadIndices, quadNumIndices;
-    
-    float *cubeVertices, *cubeTexCoords, *cubeNormals;
-    int *cubeIndices, cubeNumIndices;
-    
     std::vector<GLKVector3> vertices;
     std::vector<GLKVector2> uvs;
     std::vector<GLKVector3> normals;
-    std::vector<unsigned short> indices;
     
-    GLuint vertexbuffer;
-    GLuint uvbuffer;
-    GLuint normalbuffer;
-    GLuint elementbuffer;
+    std::vector<unsigned short> modelindices;
+    std::vector<unsigned short> cubeindices;
+    
+    
+    GLuint modelvertexbuffer;
+    GLuint modeluvbuffer;
+    GLuint modelnormalbuffer;
+    GLuint modelelementbuffer;
+    
+    GLuint cubevertexbuffer;
+    GLuint cubeuvbuffer;
+    GLuint cubenormalbuffer;
+    GLuint cubeelementbuffer;
 
     
     
@@ -118,30 +120,58 @@ static bool maze[5][5] = {
         return;
     rotAngle = 45.0f;
 
-    cubeNumIndices = glesRenderer.GenCube(0.5f, &cubeVertices, &cubeNormals, &cubeTexCoords, &cubeIndices);
-    quadNumIndices = glesRenderer.GenQuad(1.0f, &quadVertices, &quadNormals, &quadTexCoords, &quadIndices);
-    
-    if(!glesRenderer.LoadOBJ([[[NSBundle mainBundle] pathForResource:[[NSString stringWithUTF8String:"rat.obj"] stringByDeletingPathExtension] ofType:[[NSString stringWithUTF8String:"rat.obj"] pathExtension]] cStringUsingEncoding:1], vertices, uvs, normals, indices))
+    if(!glesRenderer.LoadOBJ([[[NSBundle mainBundle] pathForResource:[[NSString stringWithUTF8String:"cube.obj"] stringByDeletingPathExtension] ofType:[[NSString stringWithUTF8String:"cube.obj"] pathExtension]] cStringUsingEncoding:1], vertices, uvs, normals, cubeindices))
     {
         NSLog(@"failed to load");
     }
     
-    glGenBuffers(1, &vertexbuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    glGenBuffers(1, &cubevertexbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, cubevertexbuffer);
     glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(GLKVector3), &vertices[0], GL_STATIC_DRAW);
     
-    glGenBuffers(1, &uvbuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+    glGenBuffers(1, &cubeuvbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, cubeuvbuffer);
     glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(GLKVector2), &uvs[0], GL_STATIC_DRAW);
     
-    glGenBuffers(1, &normalbuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
+    glGenBuffers(1, &cubenormalbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, cubenormalbuffer);
     glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(GLKVector3), &normals[0], GL_STATIC_DRAW);
     
     // Generate a buffer for the indices as well
-    glGenBuffers(1, &elementbuffer);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned short), &indices[0] , GL_STATIC_DRAW);
+    glGenBuffers(1, &cubeelementbuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cubeelementbuffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, cubeindices.size() * sizeof(unsigned short), &cubeindices[0] , GL_STATIC_DRAW);
+    
+    vertices.clear();
+    uvs.clear();
+    normals.clear();
+    
+    if(!glesRenderer.LoadOBJ([[[NSBundle mainBundle] pathForResource:[[NSString stringWithUTF8String:"rat.obj"] stringByDeletingPathExtension] ofType:[[NSString stringWithUTF8String:"rat.obj"] pathExtension]] cStringUsingEncoding:1], vertices, uvs, normals, modelindices))
+    {
+        NSLog(@"failed to load");
+    }
+    
+    glGenBuffers(1, &modelvertexbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, modelvertexbuffer);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(GLKVector3), &vertices[0], GL_STATIC_DRAW);
+    
+    glGenBuffers(1, &modeluvbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, modeluvbuffer);
+    glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(GLKVector2), &uvs[0], GL_STATIC_DRAW);
+    
+    glGenBuffers(1, &modelnormalbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, modelnormalbuffer);
+    glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(GLKVector3), &normals[0], GL_STATIC_DRAW);
+    
+    // Generate a buffer for the indices as well
+    glGenBuffers(1, &modelelementbuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, modelelementbuffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, modelindices.size() * sizeof(unsigned short), &modelindices[0] , GL_STATIC_DRAW);
+    
+    vertices.clear();
+    uvs.clear();
+    normals.clear();
+    
     
     glClearColor ( 0.0f, 0.0f, 0.0f, 0.0f );
     glEnable(GL_DEPTH_TEST);
@@ -174,7 +204,7 @@ static bool maze[5][5] = {
 
     // Perspective
     m = GLKMatrix4Translate(GLKMatrix4Identity, 0, 0, 0);
-    //m = GLKMatrix4Rotate(m, GLKMathDegreesToRadians(rotAngle), 0.0, 1.0, 0.0 );
+    m = GLKMatrix4Rotate(m, GLKMathDegreesToRadians(rotAngle), 0.0, 1.0, 0.0 );
     
     normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(m), NULL);
 
@@ -201,19 +231,14 @@ static bool maze[5][5] = {
     
 }
 
-- (void)draw:(CGRect)drawRect;
+- (void)drawModel;
 {
-    
     glUniformMatrix4fv(uniforms[UNIFORM_PROJECTION_MATRIX], 1, FALSE, (const float *)p.m);
-    
-    
-    glViewport(0, 0, (int)theView.drawableWidth, (int)theView.drawableHeight);
-    glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-    
+    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEW_MATRIX], 1, FALSE, (const float *)GLKMatrix4Multiply(v, m).m);
     
     // 1st attribute buffer : vertices
     glEnableVertexAttribArray(0);
-    glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, modelvertexbuffer);
     glVertexAttribPointer(
                           0,                  // attribute
                           3,                  // size
@@ -225,7 +250,7 @@ static bool maze[5][5] = {
     
     // 2nd attribute buffer : UVs
     glEnableVertexAttribArray(1);
-    glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, modeluvbuffer);
     glVertexAttribPointer(
                           1,                                // attribute
                           2,                                // size
@@ -237,7 +262,7 @@ static bool maze[5][5] = {
     
     // 3rd attribute buffer : normals
     glEnableVertexAttribArray(2);
-    glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
+    glBindBuffer(GL_ARRAY_BUFFER, modelnormalbuffer);
     glVertexAttribPointer(
                           2,                                // attribute
                           3,                                // size
@@ -248,17 +273,13 @@ static bool maze[5][5] = {
                           );
     
     // Index buffer
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, elementbuffer);
-   
-    glBindTexture(GL_TEXTURE_2D, crateTexture);
-    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEW_MATRIX], 1, FALSE, (const float *)GLKMatrix4Multiply(v, m).m);
-    v = GLKMatrix4MakeTranslation(cam.x, 0, cam.z);
-    v = GLKMatrix4Rotate(v, camRot, 0.0, 1.0, 0.0);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, modelelementbuffer);
+    
     
     // Draw the triangles !
     glDrawElements(
                    GL_TRIANGLES,      // mode
-                   indices.size(),    // count
+                   modelindices.size(),    // count
                    GL_UNSIGNED_SHORT,   // type
                    (void*)0           // element array buffer offset
                    );
@@ -267,87 +288,143 @@ static bool maze[5][5] = {
     glDisableVertexAttribArray(1);
     glDisableVertexAttribArray(2);
 
-   
+}
+
+- (void)drawCube;
+{
+    glUniformMatrix4fv(uniforms[UNIFORM_PROJECTION_MATRIX], 1, FALSE, (const float *)p.m);
+    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEW_MATRIX], 1, FALSE, (const float *)GLKMatrix4Multiply(v, m).m);
     
-    /*
+    // 1st attribute buffer : vertices
     glEnableVertexAttribArray(0);
-    glEnableVertexAttribArray(1);
+    glBindBuffer(GL_ARRAY_BUFFER, cubevertexbuffer);
+    glVertexAttribPointer(
+                          0,                  // attribute
+                          3,                  // size
+                          GL_FLOAT,           // type
+                          GL_FALSE,           // normalized?
+                          0,                  // stride
+                          (void*)0            // array buffer offset
+                          );
     
-    // draw cube
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), cubeVertices);
-    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), cubeTexCoords);
+    // 2nd attribute buffer : UVs
+    glEnableVertexAttribArray(1);
+    glBindBuffer(GL_ARRAY_BUFFER, cubeuvbuffer);
+    glVertexAttribPointer(
+                          1,                                // attribute
+                          2,                                // size
+                          GL_FLOAT,                         // type
+                          GL_FALSE,                         // normalized?
+                          0,                                // stride
+                          (void*)0                          // array buffer offset
+                          );
+    
+    // 3rd attribute buffer : normals
+    glEnableVertexAttribArray(2);
+    glBindBuffer(GL_ARRAY_BUFFER, cubenormalbuffer);
+    glVertexAttribPointer(
+                          2,                                // attribute
+                          3,                                // size
+                          GL_FLOAT,                         // type
+                          GL_FALSE,                         // normalized?
+                          0,                                // stride
+                          (void*)0                          // array buffer offset
+                          );
+    
+    // Index buffer
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, cubeelementbuffer);
+    
+    
+    // Draw the triangles !
+    glDrawElements(
+                   GL_TRIANGLES,      // mode
+                   cubeindices.size(),    // count
+                   GL_UNSIGNED_SHORT,   // type
+                   (void*)0           // element array buffer offset
+                   );
+    
+    glDisableVertexAttribArray(0);
+    glDisableVertexAttribArray(1);
+    glDisableVertexAttribArray(2);
+    
+}
+
+- (void)draw:(CGRect)drawRect;
+{
+    
+    glUniformMatrix4fv(uniforms[UNIFORM_PROJECTION_MATRIX], 1, FALSE, (const float *)p.m);
+    
+    
+    glViewport(0, 0, (int)theView.drawableWidth, (int)theView.drawableHeight);
+    glClear ( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+    
+    
     glBindTexture(GL_TEXTURE_2D, crateTexture);
+    m = GLKMatrix4Scale(m, 0.2, 0.2, 0.2);
+    [self drawCube];
+    
+    
+    glBindTexture(GL_TEXTURE_2D, crateTexture);//lol wooden mouse
+    m = GLKMatrix4Translate(GLKMatrix4Identity, 0, 0, 0);
+    m = GLKMatrix4RotateX(m, 0);
+    m = GLKMatrix4Scale(m, 0.2, 0.2, 0.2);
+    [self drawModel];
+   
     v = GLKMatrix4MakeTranslation(cam.x, 0, cam.z);
     v = GLKMatrix4Rotate(v, camRot, 0.0, 1.0, 0.0);
-    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEW_MATRIX], 1, FALSE, (const float *)GLKMatrix4Multiply(v, m).m);
-    glDrawElements(GL_TRIANGLES, cubeNumIndices, GL_UNSIGNED_INT, cubeIndices);
-    
+    m = GLKMatrix4Identity;
     for(int i = 0; i <= 5; i++)
     {
         for(int j = 0; j <= 5; j++)
         {
             if(maze[i][j])
             {
-                glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), quadVertices);
-                glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), quadTexCoords);
-                m = GLKMatrix4MakeTranslation(i, 0, -j);
-                m = GLKMatrix4RotateX(m, M_PI / -2.0);
+                m = GLKMatrix4MakeTranslation(i, -0.5, -j);
+                m = GLKMatrix4Scale(m, 1, 0.1, 1);
                 glBindTexture(GL_TEXTURE_2D, floorTexture);
                 glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEW_MATRIX], 1, FALSE, (const float *)GLKMatrix4Multiply(v, m).m);
-                glDrawElements (GL_TRIANGLES, quadNumIndices, GL_UNSIGNED_INT, quadIndices);
+                [self drawCube];
             }
             
             if(i < 0 || !maze[i-1][j])
             {
-                glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), quadVertices);
-                glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), quadTexCoords);
-                m = GLKMatrix4MakeTranslation(i, 0, -j);
+                m = GLKMatrix4MakeTranslation(i-0.5, 0, -j);
                 m = GLKMatrix4RotateY(m, M_PI / 2.0);
+                m = GLKMatrix4Scale(m, 1, 1, 0.1);
                 glBindTexture(GL_TEXTURE_2D, leftTexture);
                 glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEW_MATRIX], 1, FALSE, (const float *)GLKMatrix4Multiply(v, m).m);
-                glDrawElements (GL_TRIANGLES, quadNumIndices, GL_UNSIGNED_INT, quadIndices);
+                [self drawCube];
             }
             if(i + 1 >= 5 || !maze[i+1][j])
             {
-                
-                glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), quadVertices);
-                glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), quadTexCoords);
-                m = GLKMatrix4MakeTranslation(i, 0, -j);
-                m = GLKMatrix4RotateY(m, M_PI / -2.0);
+                m = GLKMatrix4MakeTranslation(i+0.5, 0, -j);
+                m = GLKMatrix4RotateY(m, M_PI / 2.0);
+                m = GLKMatrix4Scale(m, 1, 1, 0.1);
                 glBindTexture(GL_TEXTURE_2D, rightTexture);
                 glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEW_MATRIX], 1, FALSE, (const float *)GLKMatrix4Multiply(v, m).m);
-                glDrawElements (GL_TRIANGLES, quadNumIndices, GL_UNSIGNED_INT, quadIndices);
-            }
+                [self drawCube];            }
             if(j - 1 < 0 || !maze[i][j-1])
             {
                 if(j == 0 && i == 0)//entrance
                     continue;
-                glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), quadVertices);
-                glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), quadTexCoords);
-                m = GLKMatrix4MakeTranslation(i, 0, -j);
+                m = GLKMatrix4MakeTranslation(i, 0, -j-0.5);
                 m = GLKMatrix4RotateY(m, M_PI);
+                m = GLKMatrix4Scale(m, 1, 1, 0.1);
                 glBindTexture(GL_TEXTURE_2D, frontTexture);
                 glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEW_MATRIX], 1, FALSE, (const float *)GLKMatrix4Multiply(v, m).m);
-                glDrawElements (GL_TRIANGLES, quadNumIndices, GL_UNSIGNED_INT, quadIndices);
+                [self drawCube];
             }
             if(j + 1 >= 5 || (i != 0 && j != 0) || !maze[i][j+1])
             {
-                glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), quadVertices);
-                glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), quadTexCoords);
-                m = GLKMatrix4MakeTranslation(i, 0, -j);
+                m = GLKMatrix4MakeTranslation(i, 0, -j+0.5);
                 m = GLKMatrix4RotateY(m, M_PI);
+                m = GLKMatrix4Scale(m, 1, 1, 0.1);
                 glBindTexture(GL_TEXTURE_2D, backTexture);
                 glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEW_MATRIX], 1, FALSE, (const float *)GLKMatrix4Multiply(v, m).m);
-                glDrawElements (GL_TRIANGLES, quadNumIndices, GL_UNSIGNED_INT, quadIndices);
+                [self drawCube];
             }
         }
     }
-    
-    */
-    
-    
-    
-    
     
 }
 
