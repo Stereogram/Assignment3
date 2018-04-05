@@ -13,12 +13,11 @@
     CGPoint start;
     float ScaleX, ScaleY;
     float AngleX;
-    
     float Xpos, Ypos, Zpos;
     bool ToggleRotate;
     bool stationary;
     bool ToggleSize;
-
+    
 }
 @end
 
@@ -38,7 +37,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    ScaleX = 1;
+    ScaleY = 1;
+    ToggleSize = false;
     stationary = false;
     // Do any additional setup after loading the view, typically from a nib.
     // ### <<<
@@ -95,14 +96,12 @@
 - (IBAction)TScale:(id)sender {
     ToggleSize = !ToggleSize;
     if (ToggleSize){
-        ScaleX = 30;
-        ScaleY = 30;
-        NSLog(@"%f", ScaleX +  ScaleY);
+        ScaleX = 3;
+        ScaleY = 3;
     } else if (ToggleSize == false)
     {
-        ScaleX = 10;
-        ScaleY = 10;
-        NSLog(@"%f", ScaleX +  ScaleY);
+        ScaleX = 1;
+        ScaleY = 1;
     }
     
     
@@ -114,27 +113,27 @@
 }
 
 - (IBAction)NeXaxis:(id)sender {
-    Xpos -= 5;
+    Xpos -= 0.1;
 }
 
 - (IBAction)PoXaxis:(id)sender {
-    Xpos += 5;
+    Xpos += 0.1;
 }
 
 - (IBAction)NeYaxis:(id)sender {
-    Ypos -= 5;
+    Ypos -= 0.1;
 }
 
 - (IBAction)PoYaxis:(id)sender {
-    Ypos += 5;
+    Ypos += 0.1;
 }
 
 - (IBAction)NeZaxis:(id)sender {
-    Zpos -= 5;
+    Zpos -= 0.1;
 }
 
 - (IBAction)PoZaxis:(id)sender {
-    Zpos += 5;
+    Zpos += 0.1;
 }
 
 
@@ -147,7 +146,9 @@
 {
     
     [glesRenderer setRotate:AngleX];
+    [glesRenderer setPosition:Xpos PositionY:Ypos PositionZ:Zpos];
     [glesRenderer setScale:ScaleX ScaleY:ScaleY]; //passes SizeX and SizeY to renderer
+    [glesRenderer station:stationary];
     [glesRenderer update]; // ###
 }
 

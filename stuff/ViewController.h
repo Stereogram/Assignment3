@@ -31,19 +31,4 @@
     IBOutlet UIButton *Zpo;
     
 }
-- (IBAction)TScale:(id)sender;
-- (IBAction)NeRotate:(id)sender;
-- (IBAction)PoRotate:(id)sender;
-
-- (IBAction)NeXaxis:(id)sender;
-- (IBAction)PoXaxis:(id)sender;
-
-- (IBAction)NeYaxis:(id)sender;
-- (IBAction)PoYaxis:(id)sender;
-
-- (IBAction)NeZaxis:(id)sender;
-- (IBAction)PoZaxis:(id)sender;
-
-
 @end
-

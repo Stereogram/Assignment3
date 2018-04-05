@@ -55,6 +55,7 @@ static bool maze[5][5] = {
     GLuint backTexture;
     
     GLKVector3 cam;
+    bool station;
     float RX; //Rotation
     float camRot;
     float SizeX, SizeY;
@@ -216,30 +217,38 @@ static bool maze[5][5] = {
 
     float aspect = (float)theView.drawableWidth / (float)theView.drawableHeight;
     p = GLKMatrix4MakePerspective(60.0f * M_PI / 180.0f, aspect, 1.0f, 20.0f);
-
+    [self walking];
 }
 
 -(void)walking{
+    
+    if(!station){
     int walk = arc4random() % 4;
     
     switch (walk)
     {
         case 0:
             NSLog(@"0");
-            forward++;
+            forward+= 0.1;
         case 1:
             NSLog(@"1");
-            forward--;
+            forward-= 0.1;
         case 2:
-            left++;
+            left+= 0.1;
             NSLog(@"2");
         case 3:
-            left--;
+            left-= 0.1;
             NSLog(@"3");
     }
-    
+    }
     
 }
+
+-(void)station:(bool)st{
+    
+    station = st;
+}
+
 
 -(void)setRotate:(float)xr{
     
@@ -394,9 +403,9 @@ static bool maze[5][5] = {
     
     
     glBindTexture(GL_TEXTURE_2D, crateTexture);//lol wooden mouse
-    m = GLKMatrix4Translate(GLKMatrix4Identity, 0, 0, 0);
-    m = GLKMatrix4RotateX(m, 0);
-    m = GLKMatrix4Scale(m, 0.2, 0.2, 0.2);
+    m = GLKMatrix4Translate(GLKMatrix4Identity, 0+mXpos + left, 0+mYpos , 0+mZpos+ forward);
+    m = GLKMatrix4RotateY(m, RX);
+    m = GLKMatrix4Scale(m, 0.2 * SizeX, 0.2 * SizeY, 0.2);
     [self drawModel];
    
     v = GLKMatrix4MakeTranslation(cam.x, 0, cam.z);
