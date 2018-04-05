@@ -11,6 +11,12 @@
 @interface ViewController() {
     Renderer *glesRenderer; // ###
     CGPoint start;
+    float ScaleX, ScaleY;
+    float AngleX;
+    bool ToggleRotate;
+    bool stationary;
+    bool ToggleSize;
+
 }
 @end
 
@@ -30,12 +36,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    stationary = false;
     // Do any additional setup after loading the view, typically from a nib.
     // ### <<<
     glesRenderer = [[Renderer alloc] init];
     GLKView *view = (GLKView *)self.view;
     [glesRenderer setup:view];
-    
+    ToggleSize = 0;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
     tap.numberOfTapsRequired = 2;
     [self.view addGestureRecognizer:tap];
@@ -45,9 +53,49 @@
     pan.minimumNumberOfTouches = 1;
     [self.view addGestureRecognizer:pan];
     
-    
-
+     UITapGestureRecognizer *doubleTapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget: self action: @selector (ThreeFingerTap:)];
+    doubleTapRecognizer.numberOfTapsRequired = 3;
+    doubleTapRecognizer.numberOfTouchesRequired =2;
     // ### >>>
+}
+- (IBAction)NeRotate:(id)sender {
+    
+    AngleX -= 25;
+}
+
+-(IBAction)ThreeFingerTap:(UITapGestureRecognizer*)sender {
+    NSLog(@"testing if this double tap gesture is working");
+    stationary = !stationary;
+    
+    if(stationary){
+        RotatePo.hidden = !RotatePo.hidden;
+        RotateNe.hidden = !RotateNe.hidden;
+        Rotate.hidden = !Rotate.hidden;
+        ToggleScale.hidden = !ToggleScale.hidden;
+        }
+    
+    
+}
+
+- (IBAction)TScale:(id)sender {
+    ToggleSize = !ToggleSize;
+    if (ToggleSize){
+        ScaleX = 30;
+        ScaleY = 30;
+        
+    } else if (ToggleSize == false)
+    {
+        ScaleX = 10;
+        ScaleY = 10;
+        
+    }
+    
+    
+}
+- (IBAction)PoRotate:(id)sender {
+
+    AngleX += 25;
+    
 }
 
 
@@ -58,6 +106,8 @@
 
 - (void)update
 {
+    [glesRenderer setRotate:AngleX];
+    [glesRenderer setScale:ScaleX ScaleY:ScaleY]; //passes SizeX and SizeY to renderer
     [glesRenderer update]; // ###
 }
 
@@ -65,6 +115,9 @@
 {
     [glesRenderer draw:rect]; // ###
 }
+
+
+
 
 
 @end

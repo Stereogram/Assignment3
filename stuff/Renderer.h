@@ -13,7 +13,8 @@
 - (void)draw:(CGRect)drawRect;
 - (void)move:(CGPoint)point;
 - (void)reset;
-
+- (void)setScale:(float)x ScaleY:(float)y;
+- (void)setRotate:(float)xr;
 @end
 
 #endif /* Renderer_h */

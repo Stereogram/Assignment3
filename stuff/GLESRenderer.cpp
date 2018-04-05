@@ -83,7 +83,7 @@ bool GLESRenderer::LoadOBJ(const char* path, std::vector<GLKVector3>& vertices, 
             GLKVector3 normal = temp_normals[ normalIndex-1 ];
             normals.push_back(normal);
         }
-        
+    }
         return true;
 }
 
@@ -375,3 +375,4 @@ int GLESRenderer::GenQuad(float scale, float **vertices, float **normals, float 
     
     return numIndices;
 }
+

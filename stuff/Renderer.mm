@@ -54,8 +54,9 @@ static bool maze[5][5] = {
     GLuint backTexture;
     
     GLKVector3 cam;
+    float RX; //Rotation
     float camRot;
-    
+    float SizeX, SizeY;
     float *quadVertices, *quadTexCoords, *quadNormals;
     int *quadIndices, quadNumIndices;
     
@@ -143,6 +144,16 @@ static bool maze[5][5] = {
     float aspect = (float)theView.drawableWidth / (float)theView.drawableHeight;
     p = GLKMatrix4MakePerspective(60.0f * M_PI / 180.0f, aspect, 1.0f, 20.0f);
 
+}
+-(void)setRotate:(float)xr{
+    
+    RX = xr;
+}
+-(void)setScale:(float)x ScaleY:(float)y{
+    
+    SizeX = x;
+    SizeY = y;
+    
 }
 
 - (void)draw:(CGRect)drawRect;
