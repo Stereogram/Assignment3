@@ -12,12 +12,11 @@
     Renderer *glesRenderer; // ###
     CGPoint start;
     float ScaleX, ScaleY;
-    float AngleX, AngleY;
+    float AngleX;
     bool ToggleRotate;
     bool stationary;
     bool ToggleSize;
-    IBOutlet UIButton *btn1;
-    IBOutlet UIButton *btn2;
+
 }
 @end
 
@@ -58,21 +57,26 @@
     tap.numberOfTapsRequired = 3;
     // ### >>>
 }
+- (IBAction)NeRotate:(id)sender {
+    
+    AngleX -= 25;
+}
 
 -(void)ThreeFingerTap:(UITapGestureRecognizer*)sender {
     NSLog(@"testing if this double tap gesture is working");
     stationary = !stationary;
     
     if(stationary){
-        btn1.hidden = !btn1.hidden;
-        btn2.hidden = !btn2.hidden;
-        
-    }
+        RotatePo.hidden = !RotatePo.hidden;
+        RotateNe.hidden = !RotateNe.hidden;
+        Rotate.hidden = !Rotate.hidden;
+        ToggleScale.hidden = !ToggleScale.hidden;
+        }
     
     
 }
 
-- (IBAction)ToggleScale:(id)sender {
+- (IBAction)TScale:(id)sender {
     ToggleSize = !ToggleSize;
     if (ToggleSize){
         ScaleX = 30;
@@ -87,15 +91,9 @@
     
     
 }
-- (IBAction)ToggleRotate:(id)sender {
-    ToggleRotate = !ToggleRotate;
-    if(ToggleRotate){
-        
-        
-    } else if (!ToggleRotate){
-        
-        
-    }
+- (IBAction)PoRotate:(id)sender {
+
+    AngleX += 25;
     
 }
 
@@ -107,6 +105,7 @@
 
 - (void)update
 {
+    [glesRenderer setRotate:AngleX];
     [glesRenderer setScale:ScaleX ScaleY:ScaleY]; //passes SizeX and SizeY to renderer
     [glesRenderer update]; // ###
 }
@@ -115,6 +114,9 @@
 {
     [glesRenderer draw:rect]; // ###
 }
+
+
+
 
 
 @end

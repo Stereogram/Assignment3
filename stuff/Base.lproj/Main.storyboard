@@ -26,24 +26,51 @@
                                     <color key="titleColor" red="1" green="0.012695232340432683" blue="0.19339469827927613" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="TScale:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KfZ-cE-ZEd"/>
                                     <action selector="ToggleScale:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gqi-sd-F9T"/>
                                 </connections>
                             </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fXp-Ls-9z9">
-                                <rect key="frame" x="20" y="195" width="105" height="30"/>
+                                <rect key="frame" x="20" y="195" width="18" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.046540357169999998" green="0.977150619" blue="0.0325708501" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Toggle Rotate">
+                                <state key="normal" title="_">
                                     <color key="titleColor" red="1" green="0.012695232339999999" blue="0.1933946983" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
+                                    <action selector="NeRotate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Hmv-0b-5fq"/>
                                     <action selector="ToggleRotate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IKg-Xr-HKc"/>
+                                </connections>
+                            </button>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="swa-VG-hj0">
+                                <rect key="frame" x="38" y="195" width="62" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.046540357169999998" green="0.977150619" blue="0.0325708501" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Rotate">
+                                    <color key="titleColor" red="1" green="0.012695232339999999" blue="0.1933946983" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OqU-A2-6MN">
+                                <rect key="frame" x="99" y="195" width="26" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.046540357169999998" green="0.977150619" blue="0.0325708501" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="+">
+                                    <color key="titleColor" red="1" green="0.012695232339999999" blue="0.1933946983" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="PoRotate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zlj-jH-e1o"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="Rotate" destination="swa-VG-hj0" id="eC3-jK-otA"/>
+                        <outlet property="RotateNe" destination="fXp-Ls-9z9" id="zkB-fe-T7N"/>
+                        <outlet property="RotatePo" destination="OqU-A2-6MN" id="cDO-lv-CXq"/>
+                        <outlet property="ToggleScale" destination="wgr-gF-380" id="mYj-yZ-dCe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
